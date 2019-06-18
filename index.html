@@ -3,10 +3,19 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="styles.css" />
-        <link rel="manifest" href="manifest.json" />
+        <link rel="manifest" href="https://hubert322.github.io/manifest.json" />
         <title>hubert322.github.io</title>
     </head>
     <body>
         <h1>Hello World!</h1>
+
+        <script>
+            if ("serviceWorker" in navigator) {
+                window.addEventListener ("load", () => {
+                    navigator.serviceWorker.register ("./service-worker.js")
+                        .then (reg => console.log ("registered", reg));
+                })
+            }
+        </script>
     </body>
 </html>
