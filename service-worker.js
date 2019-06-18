@@ -48,7 +48,9 @@ self.addEventListener ("fetch", event => {
         fetch (event.request)
             .catch (() => {
                 return caches.open (CACHE_NAME)
-                    .then (cache => cache.match ("offline.html"));
+                    .then (cache => {
+                        return cache.match ("offline.html");
+                    });
             })
     );
 });
