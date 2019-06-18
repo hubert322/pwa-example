@@ -10,14 +10,14 @@ self.addEventListener ("install", event => {
     console.log ("Install");
 
     self.skipWaiting ();
-})
+});
 
 self.addEventListener ("activate", event => {
     console.log ("Activate");
 
     self.clients.claim ();
-})
+});
 
 self.addEventListener ("fetch", event => {
     console.log ("Fetch", event.request.url);
-})
+});
