@@ -1,0 +1,16 @@
+{
+    "name": "hubert322.github.io",
+    "short_name": "hubert322",
+    "icons": [
+        {
+            "src": "'RD Palindrone.png'",
+            "type": "image/png",
+            "sizes": "192x192"
+        }
+    ],
+    "start_url": "/",
+    "background_color": "#000000",
+    "display": "standalone",
+    "orientation": "landscape",
+    "theme_color": "#000000"
+}
