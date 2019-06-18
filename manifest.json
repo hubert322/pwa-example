@@ -8,7 +8,7 @@
             "sizes": "192x192"
         }
     ],
-    "start_url": ".",
+    "start_url": "/",
     "background_color": "#000000",
     "display": "standalone",
     "orientation": "landscape",
