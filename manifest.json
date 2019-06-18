@@ -3,7 +3,7 @@
     "short_name": "hubert322",
     "icons": [
         {
-            "src": "./icon.png",
+            "src": "/icon.png",
             "type": "image/png",
             "sizes": "192x192"
         }
