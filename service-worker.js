@@ -41,8 +41,11 @@ self.addEventListener ("activate", event => {
 self.addEventListener ("fetch", event => {
     console.log ("Fetch", event.request.url);
 
+    if (event.equest.mode !== "navigate")
+        return;
+
     event.respondWith (
-        fetch (event.returnValue)
+        fetch (event.request)
             .catch (() => {
                 return caches.open (CACHE_NAME)
                     .then (cache => cache.match ("offline.html"));
