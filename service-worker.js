@@ -41,7 +41,7 @@ self.addEventListener ("activate", event => {
 self.addEventListener ("fetch", event => {
     console.log ("Fetch", event.request.url);
 
-    if (event.equest.mode !== "navigate")
+    if (event.request.mode !== "navigate")
         return;
 
     event.respondWith (
