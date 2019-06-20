@@ -2,4 +2,5 @@ html
 {
     background-color: #000000;
     color: white;
+    max-width: 90vw;
 }
