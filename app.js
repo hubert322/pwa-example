@@ -25,11 +25,30 @@ $("#submit").click (() => {
     .catch (error => console.log (error));
 });
 
+$("#notification").click (() => {
+    Notification.requestPermission ()
+        .then (result => {
+            if (result === "granted")
+                randomUserNotification ();
+        });
+});
+
+function randomUserNotification () {
+    if (usernames.length == 0)
+        return;
+
+    let username = usernames[Math.floor (Math.random () * usernames.length)];
+    let notification = new Notification (username);
+    setTimeout (randomUserNotification, 5000);
+}
+
 function createNewUser (user) {
     const html = `
-        <p>${user.login}</p>
-        <p>${user.name}</p>
-        <img src=${user.avatar_url} alt="${user.login}'s image" />
+        <div id=${user.login}>
+            <p class="login">${user.login}</p>
+            <p class="name">${user.name}</p>
+            <img class="img" src=${user.avatar_url} alt="${user.login}'s image" />
+        </div>
     `
     $("#users").append (html);
 }
@@ -53,13 +72,48 @@ function getGitHubUsersFromCache (username) {
         });
 }
 
+function getGitHubUsersFromNetwork (username) {
+    return $.ajax ({
+        method: "GET",
+        url: `https://api.github.com/users/${username}`,
+    })
+    .then (user => {
+        return user;
+    })
+    .catch (error => {
+        return null;
+    })
+}
+
+function updateUser (user) {
+    if ($(`#${user.login}`).length == 0) {
+        console.log ("Create New User", user.login);
+        createNewUser (user);
+    }
+    // else {
+    //     let updatedAt = $(`#${user.login}`).find (".updatedAt");
+    //     if (updatedAt.text () < user.updated_at) {
+    //         $(`#${user.login}`).find (".login").text (user.login);
+    //         $(`#${user.login}`).find (".name").text (user.name);
+    //         $(`#${user.login}`).find (".updatedAt").text (user.updated_at);
+    //         $(`#${user.login}`).find (".img").text (user.img);
+    //     }
+    // }
+}
+
 function updateGitHubUsers () {
     usernames.forEach (username => {
         getGitHubUsersFromCache (username)
             .then (user => {
-                if (user !== null)
-                    createNewUser (user);
+                if (user !== null) {}
+                    updateUser (user);
             });
+        // getGitHubUsersFromNetwork (username)
+        //     .then (user => {
+        //         if (user !== null)
+        //             updateUser (user);
+        //     })
+            
     })
 }
 
