@@ -61,7 +61,6 @@ function getGitHubUsersFromCache (username) {
     console.log (url);
     return caches.match (url)
         .then (response => {
-            console.log (response);
             if (response)
                 return response.json ();
             return null;
@@ -105,7 +104,13 @@ function updateGitHubUsers () {
     usernames.forEach (username => {
         getGitHubUsersFromCache (username)
             .then (user => {
-                if (user !== null) {}
+                if (user === null) {
+                    getGitHubUsersFromNetwork (username)
+                        .then (user => {
+                            updateUser (user);
+                        });
+                    }
+                if (user !== null)
                     updateUser (user);
             });
         // getGitHubUsersFromNetwork (username)
