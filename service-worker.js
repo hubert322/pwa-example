@@ -1,9 +1,14 @@
 "use strict";
 
 const CACHE_NAME = "static-cache-v1";
+const DATA_CACHE_NAME = "data-cache-v1";
 
 const FILES_TO_CACHE = [
-    "/offline.html"
+    "/",
+    "/index.html",
+    "/app.js",
+    "/styles.css",
+    "/jquery-3.4.1.min.js",
 ];
 
 self.addEventListener ("install", event => {
@@ -27,7 +32,7 @@ self.addEventListener ("activate", event => {
         caches.keys ()
             .then (keyList => {
                 return Promise.all (keyList.map (key => {
-                    if (key !== CACHE_NAME) {
+                    if (key !== CACHE_NAME && key !== DATA_CACHE_NAME) {
                         console.log ("Removing old cache", key);
                         return caches.delete (key);
                     }
@@ -41,16 +46,29 @@ self.addEventListener ("activate", event => {
 self.addEventListener ("fetch", event => {
     console.log ("Fetch", event.request.url);
 
-    if (event.request.mode !== "navigate")
+    if (event.request.url.includes ("github")) {
+        console.log ("Fetch github");
+        event.respondWith (
+            caches.open (DATA_CACHE_NAME)
+                .then (cache => {
+                    return fetch (event.request)
+                        .then (response => {
+                            console.log ("in", response);
+                            if (response.status === 200)
+                                cache.put (event.request.url, response.clone ());
+                            return response;
+                        })
+                        .catch (error => cache.match (event.request));
+                })
+        );
         return;
+    }
 
     event.respondWith (
-        fetch (event.request)
-            .catch (() => {
-                return caches.open (CACHE_NAME)
-                    .then (cache => {
-                        return cache.match ("offline.html");
-                    });
+        caches.open (CACHE_NAME)
+            .then (cache => {
+                return cache.match (event.request)
+                    .then (response => response || fetch (event.request));
             })
     );
 });

@@ -3,20 +3,29 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <link rel="stylesheet" type="text/css" href="styles.css" />
-        <link rel="manifest" href="manifest.json" />
+        <link rel="stylesheet" type="text/css" href="/styles.css" />
+        <link rel="manifest" href="/manifest.json" />
         <meta name="description" content="PWA Demo" />
         <meta name="theme-color" content="#000000" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>hubert322.github.io</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>GitHub Viewer</h1>
 
+        <input id="username" type="text" placeholder="GitHub username" />
+        <button id="submit">Submit</button>
+
+        <div id="users">
+
+        </div>
+
+        <script src="/jquery-3.4.1.min.js"></script>
+        <script src="/app.js"></script>
         <script>
             if ("serviceWorker" in navigator) {
                 window.addEventListener ("load", () => {
-                    navigator.serviceWorker.register ("./service-worker.js")
+                    navigator.serviceWorker.register ("/service-worker.js")
                         .then (reg => {
                             console.log ("registered", reg);
                         });
