@@ -1,7 +1,7 @@
 "use strict";
 
 const CACHE_NAME = "static-cache-v1";
-const DATA_CACHE_NAME = "data-cache-v1";
+const DATA_CACHE_NAME = "data-cache-v2";
 
 const FILES_TO_CACHE = [
     "/",
@@ -46,14 +46,12 @@ self.addEventListener ("activate", event => {
 self.addEventListener ("fetch", event => {
     console.log ("Fetch", event.request.url);
 
-    if (event.request.url.includes ("github")) {
-        console.log ("Fetch github");
+    if (event.request.url.includes ("api.github.com/users/")) {
         event.respondWith (
             caches.open (DATA_CACHE_NAME)
                 .then (cache => {
                     return fetch (event.request)
                         .then (response => {
-                            console.log ("in", response);
                             if (response.status === 200)
                                 cache.put (event.request.url, response.clone ());
                             return response;
