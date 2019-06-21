@@ -49,7 +49,7 @@ function createNewUser (user) {
             <p class="name">${user.name}</p>
             <img class="img" src=${user.avatar_url} alt="${user.login}'s image" />
         </div>
-    `
+    `;
     $("#users").append (html);
 }
 
@@ -85,10 +85,11 @@ function getGitHubUsersFromNetwork (username) {
 }
 
 function updateUser (user) {
-    if ($(`#${user.login}`).length == 0) {
-        console.log ("Create New User", user.login);
-        createNewUser (user);
-    }
+    createNewUser (user);
+    // if ($(`#${user.login}`).length == 0) {
+    //     console.log ("Create New User", user.login);
+    //     createNewUser (user);
+    // }
     // else {
     //     let updatedAt = $(`#${user.login}`).find (".updatedAt");
     //     if (updatedAt.text () < user.updated_at) {
@@ -110,8 +111,9 @@ function updateGitHubUsers () {
                             updateUser (user);
                         });
                     }
-                if (user !== null)
+                else {
                     updateUser (user);
+                }
             });
         // getGitHubUsersFromNetwork (username)
         //     .then (user => {
