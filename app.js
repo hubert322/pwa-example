@@ -105,15 +105,17 @@ function updateGitHubUsers () {
     usernames.forEach (username => {
         getGitHubUsersFromCache (username)
             .then (user => {
-                if (user === null) {
-                    getGitHubUsersFromNetwork (username)
-                        .then (user => {
-                            updateUser (user);
-                        });
-                    }
-                else {
+                // if (user === null) {
+                //     getGitHubUsersFromNetwork (username)
+                //         .then (user => {
+                //             updateUser (user);
+                //         });
+                //     }
+                // else {
+                //     updateUser (user);
+                // }
+                if (user !== null)
                     updateUser (user);
-                }
             });
         // getGitHubUsersFromNetwork (username)
         //     .then (user => {
