@@ -1,7 +1,8 @@
 {
     "name": "hubert322.github.io",
     "short_name": "hubert322",
-    "icons": [
+    "icons": 
+    [
         {
             "src": "/icon.png",
             "type": "image/png",
