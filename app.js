@@ -18,8 +18,8 @@ $("#submit").click (() => {
         console.log (user);
         if (!usernames.includes (user.login)) {
             createNewUser (user);
-            // usernames.push (user.login);
-            // localStorage.setItem ("usernames", usernames);
+            usernames.push (user.login);
+            localStorage.setItem ("usernames", usernames);
         }
     })
     .catch (error => console.log (error));
@@ -126,8 +126,8 @@ function updateGitHubUsers () {
 
 function init () {
     console.log ("init");
-    // if (localStorage.getItem ("usernames"))
-    //     usernames = localStorage.getItem ("usernames").split (",");
+    if (localStorage.getItem ("usernames"))
+        usernames = localStorage.getItem ("usernames").split (",");
     updateGitHubUsers ();
 }
 
