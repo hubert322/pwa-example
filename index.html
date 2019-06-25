@@ -4,10 +4,10 @@
     <head>
         <meta charset="utf-8" />
         <link rel="stylesheet" type="text/css" href="/styles.css" />
-        <!-- <link rel="manifest" href="/manifest.json" />
+        <link rel="manifest" href="/manifest.json" />
         <meta name="description" content="PWA Demo" />
         <meta name="theme-color" content="#000000" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <!-- iOS meta tags -->
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -38,14 +38,14 @@
 
         <script src="/jquery-3.4.1.min.js"></script>
         <script>
-            // if ("serviceWorker" in navigator) {
-            //     window.addEventListener ("load", () => {
-            //         navigator.serviceWorker.register ("/service-worker.js")
-            //             .then (reg => {
-            //                 console.log ("registered", reg);
-            //             });
-            //     });
-            // }
+            if ("serviceWorker" in navigator) {
+                window.addEventListener ("load", () => {
+                    navigator.serviceWorker.register ("/service-worker.js")
+                        .then (reg => {
+                            console.log ("registered", reg);
+                        });
+                });
+            }
         </script>
         <script src="/app.js"></script>
     </body>
