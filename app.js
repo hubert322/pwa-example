@@ -126,8 +126,8 @@ function updateGitHubUsers () {
 
 function init () {
     console.log ("init");
-    if (localStorage.getItem ("usernames"))
-        usernames = localStorage.getItem ("usernames").split (",");
+    // if (localStorage.getItem ("usernames"))
+    //     usernames = localStorage.getItem ("usernames").split (",");
     updateGitHubUsers ();
 }
 
